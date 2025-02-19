@@ -25,7 +25,10 @@ logger = logging.getLogger(__name__)
 
 
 def sanitize_string(s):
-    return re.sub(r"[^A-Za-z_]", "", s)
+    s = re.sub(r"[^A-Za-z0-9_]", "", s)
+    if s == "" or s[0].isdigit():
+        s = "_" + s
+    return s
 
 
 def tensor_product_ops_impl(
