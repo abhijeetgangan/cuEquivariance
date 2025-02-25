@@ -372,7 +372,9 @@ def tensor_product_jvp(
         jvp_buffer_index,
         jvp_descriptors,
         math_dtype,
-        name + "_jvp",
+        name
+        + "_jvp"
+        + "".join("0" if isinstance(t, ad.Zero) else "1" for t in tangents),
         impl=impl,
     )
 
