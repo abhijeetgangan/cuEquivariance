@@ -1,6 +1,6 @@
 ## Latest Changes
 
-## 0.3.0-rc1
+## 0.3.0
 
 ### Breaking Changes
 - In `cuex.equivariant_tensor_product`, the arguments `dtype_math` and `dtype_output` are renamed `math_dtype` and `output_dtype` respectively. Adding consistency with the rest of the library.
