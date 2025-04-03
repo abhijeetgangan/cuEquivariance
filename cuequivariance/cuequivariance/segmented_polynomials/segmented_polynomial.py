@@ -475,12 +475,32 @@ class SegmentedPolynomial:
             ],
         )
 
-    def squeeze_modes(self) -> SegmentedPolynomial:
+    def flatten_modes(self, modes: list[str]) -> SegmentedPolynomial:
+        """Flatten the specified modes of the polynomial."""
+        return SegmentedPolynomial.from_default_buffers(
+            self.inputs,
+            self.outputs,
+            [(ope, stp.flatten_modes(modes)) for ope, stp in self.operations],
+        )
+
+    def all_same_segment_shape(self) -> bool:
+        """Check if all operands have the same segment shape."""
+        return all(ope.all_same_segment_shape() for ope in self.operands)
+
+    def canonicalize_subscripts(self) -> SegmentedPolynomial:
+        """Canonicalize the subscripts of the segmented tensor products."""
+        return SegmentedPolynomial.from_default_buffers(
+            self.inputs,
+            self.outputs,
+            [(ope, stp.canonicalize_subscripts()) for ope, stp in self.operations],
+        )
+
+    def squeeze_modes(self, modes: str | None = None) -> SegmentedPolynomial:
         """Squeeze the modes of the segmented tensor products."""
         return SegmentedPolynomial.from_default_buffers(
             self.inputs,
             self.outputs,
-            [(ope, stp.squeeze_modes()) for ope, stp in self.operations],
+            [(ope, stp.squeeze_modes(modes)) for ope, stp in self.operations],
         )
 
     def flatten_coefficient_modes(self) -> SegmentedPolynomial:
@@ -489,14 +509,6 @@ class SegmentedPolynomial:
             self.inputs,
             self.outputs,
             [(ope, stp.flatten_coefficient_modes()) for ope, stp in self.operations],
-        )
-
-    def flatten_modes(self, modes: list[str]) -> SegmentedPolynomial:
-        """Flatten the specified modes of the segmented tensor products."""
-        return SegmentedPolynomial.from_default_buffers(
-            self.inputs,
-            self.outputs,
-            [(ope, stp.flatten_modes(modes)) for ope, stp in self.operations],
         )
 
     def jvp(self, has_tangent: list[bool]) -> SegmentedPolynomial:
