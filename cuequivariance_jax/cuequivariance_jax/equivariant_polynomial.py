@@ -33,22 +33,32 @@ def equivariant_polynomial(
 ) -> list[cuex.RepArray] | cuex.RepArray:
     """Compute an equivariant polynomial.
 
+    Evaluates an equivariant polynomial, which represents a mathematical operation that
+    respects group symmetries. This function is the equivariant wrapper around the
+    :func:`cuex.segmented_polynomial <cuequivariance_jax.segmented_polynomial>` function,
+    providing type checking and handling for representation-aware arrays.
+
     Args:
         poly: The equivariant polynomial descriptor.
         inputs: List of input :class:`cuex.RepArray <cuequivariance_jax.RepArray>`.
         outputs_shape_dtype: Shape and dtype specifications for outputs. If None,
             inferred from inputs when possible. When output indices are provided, this must be specified.
+            The last shape dimension can be set to -1 to infer the size from the polynomial descriptor.
         indices: Optional list of indices for inputs and outputs. Length must match
             total number of operands (inputs + outputs). Use None for unindexed
             operands. Defaults to None.
         math_dtype: Data type for computational operations. If None, automatically
             determined from input types. Defaults to None.
         name: Optional name for the operation. Defaults to None.
-        impl: Implementation to use, one of ["auto", "cuda", "jax"]. If "auto",
-            uses CUDA when available, falling back to JAX otherwise. Defaults to "auto".
+        impl: Implementation to use, one of ["auto", "cuda", "jax", "naive_jax"]. If "auto",
+            uses CUDA when available and efficient, falling back to JAX otherwise. Defaults to "auto".
 
     Returns:
-        Single :class:`cuex.RepArray <cuequivariance_jax.RepArray>` if one output, or list of :class:`cuex.RepArray <cuequivariance_jax.RepArray>` for multiple outputs.
+        :class:`cuex.RepArray <cuequivariance_jax.RepArray>` or list of :class:`cuex.RepArray <cuequivariance_jax.RepArray>`
+
+    Note:
+        See :func:`cuex.segmented_polynomial <cuequivariance_jax.segmented_polynomial>` for more details on the
+        implementation and usage of the underlying CUDA and JAX implementations.
 
     Examples:
         Create and compute spherical harmonics of degree 0, 1, and 2:

@@ -8,6 +8,7 @@
 - [Torch/JAX] Deprecate `cue.EquivariantTensorProduct` in favor of `cue.EquivariantPolynomial`. The later will have a limited list of features compared to `cue.EquivariantTensorProduct`. It does not contain `change_layout` and the methods to move the operands. Please open an issue if you need any of the missing methods.
 - [Torch/JAX] The descriptors return `cue.EquivariantPolynomial` instead of `cue.EquivariantTensorProduct`
 - [Torch/JAX] Change `cue.SegmentedPolynomial.canonicalize_subscripts` behavior for coefficient subscripts. It transposes the coefficients to be ordered the same way as the rest of the subscripts.
+- [Torch] To reduce the size of the so library, we removed support of math dtype fp32 when using IO dtype fp64 in the case of the fully connected tensor product. (It concerns `cuet.FullyConnectedTensorProduct` and `cuet.FullyConnectedTensorProductConv`). Please open an issue if you need this feature.
 
 ### Added
 - [Torch/JAX] Class `cue.SegmentedOperand`
