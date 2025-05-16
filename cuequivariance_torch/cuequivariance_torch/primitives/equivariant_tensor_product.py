@@ -283,7 +283,7 @@ class EquivariantTensorProduct(torch.nn.Module):
         if (
             not torch.jit.is_scripting()
             and not torch.jit.is_tracing()
-            and not torch.compiler.is_compiling()
+            and not torch._dynamo.external_utils.is_compiling()
         ):
             if len(inputs) != self.etp.num_inputs:
                 raise ValueError(

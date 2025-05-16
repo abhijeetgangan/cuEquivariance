@@ -160,7 +160,7 @@ class TensorProduct(torch.nn.Module):
         if (
             not torch.jit.is_scripting()
             and not torch.jit.is_tracing()
-            and not torch.compiler.is_compiling()
+            and not torch._dynamo.external_utils.is_compiling()
         ):
             if len(inputs) != self.num_operands - 1:
                 raise ValueError(
@@ -547,7 +547,7 @@ class FusedTensorProductOp3(torch.nn.Module):
         if (
             not torch.jit.is_scripting()
             and not torch.jit.is_tracing()
-            and not torch.compiler.is_compiling()
+            and not torch._dynamo.external_utils.is_compiling()
         ):
             logger.debug(
                 f"Calling FusedTensorProductOp3: {self.descriptor}, input shapes: {x0.shape}, {x1.shape}"
@@ -604,7 +604,7 @@ class FusedTensorProductOp4(torch.nn.Module):
         if (
             not torch.jit.is_scripting()
             and not torch.jit.is_tracing()
-            and not torch.compiler.is_compiling()
+            and not torch._dynamo.external_utils.is_compiling()
         ):
             logger.debug(
                 f"Calling FusedTensorProductOp4: {self.descriptor}, input shapes: {x0.shape}, {x1.shape}, {x2.shape}"
@@ -653,7 +653,7 @@ class TensorProductUniform3x1d(TensorProductUniform1d):
         if (
             not torch.jit.is_scripting()
             and not torch.jit.is_tracing()
-            and not torch.compiler.is_compiling()
+            and not torch._dynamo.external_utils.is_compiling()
         ):
             logger.debug(
                 f"Calling TensorProductUniform3x1d: {self.descriptor}, input shapes: {x0.shape}, {x1.shape}"
@@ -677,7 +677,7 @@ class TensorProductUniform4x1d(TensorProductUniform1d):
         if (
             not torch.jit.is_scripting()
             and not torch.jit.is_tracing()
-            and not torch.compiler.is_compiling()
+            and not torch._dynamo.external_utils.is_compiling()
         ):
             logger.debug(
                 f"Calling TensorProductUniform4x1d: {self.descriptor}, input shapes: {x0.shape}, {x1.shape}, {x2.shape}"
@@ -735,7 +735,7 @@ class TensorProductUniform3x1dIndexed(torch.nn.Module):
         if (
             not torch.jit.is_scripting()
             and not torch.jit.is_tracing()
-            and not torch.compiler.is_compiling()
+            and not torch._dynamo.external_utils.is_compiling()
         ):
             logger.debug(
                 f"Calling TensorProductUniform3x1d: {self.descriptor}, input shapes: {x0.shape}, {x1.shape}"
@@ -794,7 +794,7 @@ class TensorProductUniform4x1dIndexed(torch.nn.Module):
         if (
             not torch.jit.is_scripting()
             and not torch.jit.is_tracing()
-            and not torch.compiler.is_compiling()
+            and not torch._dynamo.external_utils.is_compiling()
         ):
             logger.debug(
                 f"Calling TensorProductUniform4x1d: {self.descriptor}, input shapes: {x0.shape}, {x1.shape}"

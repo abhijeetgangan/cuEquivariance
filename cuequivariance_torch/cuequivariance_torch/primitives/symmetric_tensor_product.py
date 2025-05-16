@@ -327,7 +327,7 @@ class CUDAKernel(torch.nn.Module):
         if (
             not torch.jit.is_scripting()
             and not torch.jit.is_tracing()
-            and not torch.compiler.is_compiling()
+            and not torch._dynamo.external_utils.is_compiling()
         ):
             logger.debug(
                 f"Calling SymmetricTensorContraction: {self.descriptors}, input shapes: {x0.shape}, {i0.shape}, {x1.shape}"
